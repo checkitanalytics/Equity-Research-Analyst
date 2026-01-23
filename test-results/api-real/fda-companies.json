@@ -1,0 +1,888 @@
+{
+  "success": true,
+  "count": 126,
+  "data": [
+    {
+      "company": "Neurotech Pharmaceuticals",
+      "ticker": "N/A",
+      "totalDrugs": 10,
+      "totalEvents": 10,
+      "latestUpdate": "PDUFA Date"
+    },
+    {
+      "company": "GSK",
+      "ticker": "GSK",
+      "totalDrugs": 8,
+      "totalEvents": 9,
+      "latestUpdate": "2026-03-24"
+    },
+    {
+      "company": "Sanofi SA ( ,",
+      "ticker": "SNYNF",
+      "totalDrugs": 4,
+      "totalEvents": 6,
+      "latestUpdate": "2025-12-28"
+    },
+    {
+      "company": "Amgen",
+      "ticker": "AMGN",
+      "totalDrugs": 5,
+      "totalEvents": 5,
+      "latestUpdate": "2028-02-01"
+    },
+    {
+      "company": "Regeneron Pharmaceuticals",
+      "ticker": "REGN",
+      "totalDrugs": 5,
+      "totalEvents": 5,
+      "latestUpdate": "Q4 2025"
+    },
+    {
+      "company": "Sanofi",
+      "ticker": "SNY",
+      "totalDrugs": 4,
+      "totalEvents": 4,
+      "latestUpdate": "2026-01-13"
+    },
+    {
+      "company": "Merck",
+      "ticker": "MRK",
+      "totalDrugs": 4,
+      "totalEvents": 4,
+      "latestUpdate": "2025-10-25"
+    },
+    {
+      "company": "Ascendis Pharma",
+      "ticker": "ASND",
+      "totalDrugs": 4,
+      "totalEvents": 4,
+      "latestUpdate": "2025-11-30"
+    },
+    {
+      "company": "Agios Pharmaceuticals",
+      "ticker": "AGIO",
+      "totalDrugs": 4,
+      "totalEvents": 4,
+      "latestUpdate": "2025-12-07"
+    },
+    {
+      "company": "HUTCHMED (China) Limited",
+      "ticker": "",
+      "totalDrugs": 17,
+      "totalEvents": 4,
+      "latestUpdate": "07/09/2024 ET"
+    },
+    {
+      "company": "Novartis",
+      "ticker": "NVS",
+      "totalDrugs": 3,
+      "totalEvents": 3,
+      "latestUpdate": "2025-04-02"
+    },
+    {
+      "company": "Alnylam Pharmaceuticals",
+      "ticker": "ALNY",
+      "totalDrugs": 2,
+      "totalEvents": 3,
+      "latestUpdate": "2025-03-28"
+    },
+    {
+      "company": "Bristol Myers Squibb",
+      "ticker": "BMY",
+      "totalDrugs": 3,
+      "totalEvents": 3,
+      "latestUpdate": "2025-12-05"
+    },
+    {
+      "company": "Jazz Pharmaceuticals",
+      "ticker": "JAZZ",
+      "totalDrugs": 3,
+      "totalEvents": 3,
+      "latestUpdate": "2025-10-07"
+    },
+    {
+      "company": "Travere Therapeutics",
+      "ticker": "TVTX",
+      "totalDrugs": 3,
+      "totalEvents": 3,
+      "latestUpdate": "2026-01-13"
+    },
+    {
+      "company": "Syndax Pharmaceuticals",
+      "ticker": "SNDX",
+      "totalDrugs": 3,
+      "totalEvents": 3,
+      "latestUpdate": "2025-10-25"
+    },
+    {
+      "company": "Biohaven",
+      "ticker": "BHVN",
+      "totalDrugs": 3,
+      "totalEvents": 3,
+      "latestUpdate": "Q4 2025"
+    },
+    {
+      "company": "REGENXBIO",
+      "ticker": "RGNX",
+      "totalDrugs": 2,
+      "totalEvents": 3,
+      "latestUpdate": "2026-02-08"
+    },
+    {
+      "company": "Cytokinetics",
+      "ticker": "CYTK",
+      "totalDrugs": 2,
+      "totalEvents": 3,
+      "latestUpdate": "2025-12-26"
+    },
+    {
+      "company": "Ionis Pharmaceuticals",
+      "ticker": "IONS",
+      "totalDrugs": 3,
+      "totalEvents": 3,
+      "latestUpdate": "2025-09-22"
+    },
+    {
+      "company": "Arcutis Biotherapeutics Inc",
+      "ticker": "ARQT",
+      "totalDrugs": 3,
+      "totalEvents": 3,
+      "latestUpdate": "2025-10-13"
+    },
+    {
+      "company": "Milestone Pharmaceuticals Inc",
+      "ticker": "MIST",
+      "totalDrugs": 2,
+      "totalEvents": 3,
+      "latestUpdate": "2025-12-13"
+    },
+    {
+      "company": "Springworks Therapeutics",
+      "ticker": "SWTX",
+      "totalDrugs": 1,
+      "totalEvents": 2,
+      "latestUpdate": "2025-02-28"
+    },
+    {
+      "company": "Atara Biotherapeutics",
+      "ticker": "ATRA",
+      "totalDrugs": 2,
+      "totalEvents": 2,
+      "latestUpdate": "2026-01-10"
+    },
+    {
+      "company": "Mirum Therapeutics",
+      "ticker": "MIRM",
+      "totalDrugs": 2,
+      "totalEvents": 2,
+      "latestUpdate": "2025-03-28"
+    },
+    {
+      "company": "Soleno Therapeutics",
+      "ticker": "SLNO",
+      "totalDrugs": 2,
+      "totalEvents": 2,
+      "latestUpdate": "2025-03-27"
+    },
+    {
+      "company": "Johnson & Johnson",
+      "ticker": "JNJ",
+      "totalDrugs": 1,
+      "totalEvents": 2,
+      "latestUpdate": "2025-04-30"
+    },
+    {
+      "company": "Eton Pharmaceuticals",
+      "ticker": "ETON",
+      "totalDrugs": 2,
+      "totalEvents": 2,
+      "latestUpdate": "2025-05-28"
+    },
+    {
+      "company": "PTC Therapeutics",
+      "ticker": "PTCT",
+      "totalDrugs": 2,
+      "totalEvents": 2,
+      "latestUpdate": "2025-08-19"
+    },
+    {
+      "company": "Precigen",
+      "ticker": "PGEN",
+      "totalDrugs": 2,
+      "totalEvents": 2,
+      "latestUpdate": "2025-08-27"
+    },
+    {
+      "company": "Capricor Therapeutics",
+      "ticker": "CAPR",
+      "totalDrugs": 2,
+      "totalEvents": 2,
+      "latestUpdate": "2025-08-31"
+    },
+    {
+      "company": "Scholar Rock",
+      "ticker": "SRRK",
+      "totalDrugs": 2,
+      "totalEvents": 2,
+      "latestUpdate": "2025-09-22"
+    },
+    {
+      "company": "Crinetics Pharmaceuticals",
+      "ticker": "CRNX",
+      "totalDrugs": 2,
+      "totalEvents": 2,
+      "latestUpdate": "2025-09-25"
+    },
+    {
+      "company": "Fortress Biotech",
+      "ticker": "FBIO",
+      "totalDrugs": 2,
+      "totalEvents": 2,
+      "latestUpdate": "2025-09-30"
+    },
+    {
+      "company": "Glaukos Corporation",
+      "ticker": "GKOS",
+      "totalDrugs": 2,
+      "totalEvents": 2,
+      "latestUpdate": "2025-10-20"
+    },
+    {
+      "company": "Arrowhead Pharmaceuticals",
+      "ticker": "ARWR",
+      "totalDrugs": 2,
+      "totalEvents": 2,
+      "latestUpdate": "2025-11-18"
+    },
+    {
+      "company": "BioCryst Pharmaceuticals",
+      "ticker": "BCRX",
+      "totalDrugs": 2,
+      "totalEvents": 2,
+      "latestUpdate": "2025-12-12"
+    },
+    {
+      "company": "Corcept Therapeutics",
+      "ticker": "CORT",
+      "totalDrugs": 2,
+      "totalEvents": 2,
+      "latestUpdate": "2025-12-30"
+    },
+    {
+      "company": "Abeona Therapeutics",
+      "ticker": "ABEO",
+      "totalDrugs": 2,
+      "totalEvents": 2,
+      "latestUpdate": "2025-04-29"
+    },
+    {
+      "company": "Kura Oncology Inc",
+      "ticker": "KURA",
+      "totalDrugs": 2,
+      "totalEvents": 2,
+      "latestUpdate": "2025-11-30"
+    },
+    {
+      "company": "Biogen Inc.",
+      "ticker": "BIIB",
+      "totalDrugs": 2,
+      "totalEvents": 2,
+      "latestUpdate": "2025-09-22"
+    },
+    {
+      "company": "Incyte Corporation",
+      "ticker": "INCY",
+      "totalDrugs": 2,
+      "totalEvents": 2,
+      "latestUpdate": "2025-10-25"
+    },
+    {
+      "company": "Omeros Corp.",
+      "ticker": "OMER",
+      "totalDrugs": 1,
+      "totalEvents": 2,
+      "latestUpdate": "2025-12-26"
+    },
+    {
+      "company": "",
+      "ticker": "GERN",
+      "totalDrugs": 25,
+      "totalEvents": 2,
+      "latestUpdate": "2026-01-01"
+    },
+    {
+      "company": "NRx Pharmaceuticals, Inc.",
+      "ticker": "NRXP",
+      "totalDrugs": 2,
+      "totalEvents": 2,
+      "latestUpdate": "2025-10-25"
+    },
+    {
+      "company": "Bayer AG",
+      "ticker": "",
+      "totalDrugs": 17,
+      "totalEvents": 2,
+      "latestUpdate": "2025-11-28"
+    },
+    {
+      "company": "AstraZeneca PLC",
+      "ticker": "AZN",
+      "totalDrugs": 2,
+      "totalEvents": 2,
+      "latestUpdate": "Q4 2025"
+    },
+    {
+      "company": "Amneal Pharmaceuticals, Inc.",
+      "ticker": "AMRX",
+      "totalDrugs": 2,
+      "totalEvents": 2,
+      "latestUpdate": "Q4 2025"
+    },
+    {
+      "company": "",
+      "ticker": "PFE",
+      "totalDrugs": 25,
+      "totalEvents": 2,
+      "latestUpdate": "2025-05-01"
+    },
+    {
+      "company": "",
+      "ticker": "TLPPF",
+      "totalDrugs": 25,
+      "totalEvents": 2,
+      "latestUpdate": "2025-04-26"
+    },
+    {
+      "company": "Deciphera Pharmaceuticals",
+      "ticker": "DCPH",
+      "totalDrugs": 1,
+      "totalEvents": 1,
+      "latestUpdate": "2025-02-17"
+    },
+    {
+      "company": "Mesoblast Limited",
+      "ticker": "MESO",
+      "totalDrugs": 2,
+      "totalEvents": 1,
+      "latestUpdate": "2025-01-07"
+    },
+    {
+      "company": "Liquidia Corporation",
+      "ticker": "LQDA",
+      "totalDrugs": 1,
+      "totalEvents": 1,
+      "latestUpdate": "2025-05-24"
+    },
+    {
+      "company": "KalVista Pharmaceuticals",
+      "ticker": "KALV",
+      "totalDrugs": 1,
+      "totalEvents": 1,
+      "latestUpdate": "2025-06-17"
+    },
+    {
+      "company": "CSL",
+      "ticker": "CSL",
+      "totalDrugs": 1,
+      "totalEvents": 1,
+      "latestUpdate": "2025-06-18"
+    },
+    {
+      "company": "Nuvation Bio",
+      "ticker": "NUVB",
+      "totalDrugs": 1,
+      "totalEvents": 1,
+      "latestUpdate": "2025-06-23"
+    },
+    {
+      "company": "Sobi",
+      "ticker": "SOBI",
+      "totalDrugs": 1,
+      "totalEvents": 1,
+      "latestUpdate": "2025-06-28"
+    },
+    {
+      "company": "Takeda",
+      "ticker": "TAK",
+      "totalDrugs": 1,
+      "totalEvents": 1,
+      "latestUpdate": "2025-06-30"
+    },
+    {
+      "company": "Apellis Pharmaceuticals",
+      "ticker": "APLS",
+      "totalDrugs": 1,
+      "totalEvents": 1,
+      "latestUpdate": "2025-07-28"
+    },
+    {
+      "company": "Novo Nordisk",
+      "ticker": "NVO",
+      "totalDrugs": 1,
+      "totalEvents": 1,
+      "latestUpdate": "2025-07-31"
+    },
+    {
+      "company": "Ultragenyx",
+      "ticker": "RARE",
+      "totalDrugs": 1,
+      "totalEvents": 1,
+      "latestUpdate": "2025-08-18"
+    },
+    {
+      "company": "Roche",
+      "ticker": "ROG",
+      "totalDrugs": 1,
+      "totalEvents": 1,
+      "latestUpdate": "2025-10-19"
+    },
+    {
+      "company": "UCB",
+      "ticker": "UCB",
+      "totalDrugs": 1,
+      "totalEvents": 1,
+      "latestUpdate": "2025-11-03"
+    },
+    {
+      "company": "Otsuka Pharmaceutical Co.",
+      "ticker": "4578",
+      "totalDrugs": 1,
+      "totalEvents": 1,
+      "latestUpdate": "2025-11-28"
+    },
+    {
+      "company": "Kura Oncology and Kyowa Kirin",
+      "ticker": "KURA / TSE:4151",
+      "totalDrugs": 1,
+      "totalEvents": 1,
+      "latestUpdate": "2025-11-30"
+    },
+    {
+      "company": "Pharming Group",
+      "ticker": "PHARM",
+      "totalDrugs": 1,
+      "totalEvents": 1,
+      "latestUpdate": "2026-01-31"
+    },
+    {
+      "company": "BioMarin",
+      "ticker": "BMRN",
+      "totalDrugs": 1,
+      "totalEvents": 1,
+      "latestUpdate": "2026-02-28"
+    },
+    {
+      "company": "Rocket Pharmaceuticals",
+      "ticker": "RCKT",
+      "totalDrugs": 1,
+      "totalEvents": 1,
+      "latestUpdate": "2026-03-28"
+    },
+    {
+      "company": "Denali Therapeutics",
+      "ticker": "DNLI",
+      "totalDrugs": 1,
+      "totalEvents": 1,
+      "latestUpdate": "2026-04-05"
+    },
+    {
+      "company": "Xspray Pharma",
+      "ticker": "XSPRAY",
+      "totalDrugs": 1,
+      "totalEvents": 1,
+      "latestUpdate": "2026-06-18"
+    },
+    {
+      "company": "",
+      "ticker": "MNKD",
+      "totalDrugs": 25,
+      "totalEvents": 1,
+      "latestUpdate": "2025-09-01"
+    },
+    {
+      "company": "BridgeBio Pharma Inc",
+      "ticker": "BBIO",
+      "totalDrugs": 1,
+      "totalEvents": 1,
+      "latestUpdate": "2025-10-27"
+    },
+    {
+      "company": "Adagene Inc.",
+      "ticker": "ADAG",
+      "totalDrugs": 1,
+      "totalEvents": 1,
+      "latestUpdate": "2025-H2"
+    },
+    {
+      "company": "Moleculin Biotech Inc",
+      "ticker": "MBRX",
+      "totalDrugs": 1,
+      "totalEvents": 1,
+      "latestUpdate": "2025-H2"
+    },
+    {
+      "company": "Harmony Biosciences Holdings Inc",
+      "ticker": "HRMY",
+      "totalDrugs": 1,
+      "totalEvents": 1,
+      "latestUpdate": "2025-H2"
+    },
+    {
+      "company": "Zymeworks Inc",
+      "ticker": "ZYME",
+      "totalDrugs": 1,
+      "totalEvents": 1,
+      "latestUpdate": "2025-H2"
+    },
+    {
+      "company": "Outlook Therapeutics, Inc.",
+      "ticker": "OTLK",
+      "totalDrugs": 1,
+      "totalEvents": 1,
+      "latestUpdate": "2025-08-27"
+    },
+    {
+      "company": "Telix Pharmaceuticals Limited (",
+      "ticker": "TLX",
+      "totalDrugs": 1,
+      "totalEvents": 1,
+      "latestUpdate": "2025-08-27"
+    },
+    {
+      "company": "Ligand Pharmaceuticals Inc",
+      "ticker": "LGND",
+      "totalDrugs": 1,
+      "totalEvents": 1,
+      "latestUpdate": "2025-08-28"
+    },
+    {
+      "company": "BioArctic AB",
+      "ticker": "BRCTF",
+      "totalDrugs": 1,
+      "totalEvents": 1,
+      "latestUpdate": "2025-08-31"
+    },
+    {
+      "company": "Eisai Co Ltd",
+      "ticker": "",
+      "totalDrugs": 17,
+      "totalEvents": 1,
+      "latestUpdate": "2025-08-31"
+    },
+    {
+      "company": "Roche Holding AG",
+      "ticker": "RHHBY",
+      "totalDrugs": 1,
+      "totalEvents": 1,
+      "latestUpdate": "2025-10-25"
+    },
+    {
+      "company": "Teva Pharmaceutical Industries Limited",
+      "ticker": "TEVA",
+      "totalDrugs": 1,
+      "totalEvents": 1,
+      "latestUpdate": "2025-10-25"
+    },
+    {
+      "company": "enVVeno Medical Corp",
+      "ticker": "NVNO",
+      "totalDrugs": 1,
+      "totalEvents": 1,
+      "latestUpdate": "2025-10-25"
+    },
+    {
+      "company": "Otsuka Holdings Co., Ltd. (",
+      "ticker": "OTSKF",
+      "totalDrugs": 1,
+      "totalEvents": 1,
+      "latestUpdate": "2025-11-28"
+    },
+    {
+      "company": "AxoGen",
+      "ticker": "",
+      "totalDrugs": 17,
+      "totalEvents": 1,
+      "latestUpdate": "2025-12-05"
+    },
+    {
+      "company": "Innoviva, Inc.",
+      "ticker": "INVA",
+      "totalDrugs": 1,
+      "totalEvents": 1,
+      "latestUpdate": "2025-12-15"
+    },
+    {
+      "company": "Rhythm Pharmaceuticals, Inc.",
+      "ticker": "RYTM",
+      "totalDrugs": 1,
+      "totalEvents": 1,
+      "latestUpdate": "2025-12-20"
+    },
+    {
+      "company": "Royalty Pharma plc",
+      "ticker": "RPRX",
+      "totalDrugs": 1,
+      "totalEvents": 1,
+      "latestUpdate": "2025-12-26"
+    },
+    {
+      "company": "VANDA PHARMACEUTICALS",
+      "ticker": "VNDA",
+      "totalDrugs": 1,
+      "totalEvents": 1,
+      "latestUpdate": "2025-12-30"
+    },
+    {
+      "company": "Daiichi Sankyo Company Limited (",
+      "ticker": "DSKYF",
+      "totalDrugs": 1,
+      "totalEvents": 1,
+      "latestUpdate": "Q3 2025"
+    },
+    {
+      "company": "Mitsubishi Tanabe Pharma Corp",
+      "ticker": "",
+      "totalDrugs": 17,
+      "totalEvents": 1,
+      "latestUpdate": "Q4 2025"
+    },
+    {
+      "company": "",
+      "ticker": "LRMR",
+      "totalDrugs": 25,
+      "totalEvents": 1,
+      "latestUpdate": "2025-07-01"
+    },
+    {
+      "company": "Sanofi SA",
+      "ticker": "",
+      "totalDrugs": 18,
+      "totalEvents": 1,
+      "latestUpdate": "2025-09-28"
+    },
+    {
+      "company": "Cytokinetics Inc",
+      "ticker": "",
+      "totalDrugs": 17,
+      "totalEvents": 1,
+      "latestUpdate": "2025-09-26"
+    },
+    {
+      "company": "Immuneering Corporation",
+      "ticker": "",
+      "totalDrugs": 17,
+      "totalEvents": 1,
+      "latestUpdate": "2025-09-25"
+    },
+    {
+      "company": "NovoCure Limited",
+      "ticker": "",
+      "totalDrugs": 17,
+      "totalEvents": 1,
+      "latestUpdate": "07/17/2024 ET"
+    },
+    {
+      "company": "Zai Lab Limited",
+      "ticker": "",
+      "totalDrugs": 17,
+      "totalEvents": 1,
+      "latestUpdate": "07/17/2024 ET"
+    },
+    {
+      "company": "Mesoblast Limited",
+      "ticker": "",
+      "totalDrugs": 18,
+      "totalEvents": 1,
+      "latestUpdate": "07/12/2024 ET"
+    },
+    {
+      "company": "Brainstorm Cell Therapeutics Inc.",
+      "ticker": "",
+      "totalDrugs": 17,
+      "totalEvents": 1,
+      "latestUpdate": "07/08/2024 ET"
+    },
+    {
+      "company": "Arcutis Biotherapeutics Inc.",
+      "ticker": "",
+      "totalDrugs": 19,
+      "totalEvents": 1,
+      "latestUpdate": "07/07/2024 ET"
+    },
+    {
+      "company": "Kazia Therapeutics Limited",
+      "ticker": "",
+      "totalDrugs": 17,
+      "totalEvents": 1,
+      "latestUpdate": "07/02/2024 ET"
+    },
+    {
+      "company": "",
+      "ticker": "IMRX",
+      "totalDrugs": 25,
+      "totalEvents": 1,
+      "latestUpdate": "2025-09-25"
+    },
+    {
+      "company": "",
+      "ticker": "SNYSNYNF",
+      "totalDrugs": 25,
+      "totalEvents": 1,
+      "latestUpdate": "2025-09-28"
+    },
+    {
+      "company": "Annexon",
+      "ticker": "ANNX",
+      "totalDrugs": 1,
+      "totalEvents": 1,
+      "latestUpdate": "2025-02-13"
+    },
+    {
+      "company": "BioCardia",
+      "ticker": "BCDA",
+      "totalDrugs": 1,
+      "totalEvents": 1,
+      "latestUpdate": "2025-02-13"
+    },
+    {
+      "company": "Bio-Path Holdings",
+      "ticker": "BPTH",
+      "totalDrugs": 1,
+      "totalEvents": 1,
+      "latestUpdate": "2025-02-13"
+    },
+    {
+      "company": "",
+      "ticker": "CDT",
+      "totalDrugs": 25,
+      "totalEvents": 1,
+      "latestUpdate": "2025-02-13"
+    },
+    {
+      "company": "Genprex",
+      "ticker": "GNPX",
+      "totalDrugs": 1,
+      "totalEvents": 1,
+      "latestUpdate": "2025-02-13"
+    },
+    {
+      "company": "IDEAYA Biosciences",
+      "ticker": "IDYA",
+      "totalDrugs": 1,
+      "totalEvents": 1,
+      "latestUpdate": "2025-02-13"
+    },
+    {
+      "company": "InspireMD",
+      "ticker": "NSPR",
+      "totalDrugs": 1,
+      "totalEvents": 1,
+      "latestUpdate": "2025-02-13"
+    },
+    {
+      "company": "",
+      "ticker": "NTRB",
+      "totalDrugs": 25,
+      "totalEvents": 1,
+      "latestUpdate": "2025-02-13"
+    },
+    {
+      "company": "RenovoRx",
+      "ticker": "RNXT",
+      "totalDrugs": 1,
+      "totalEvents": 1,
+      "latestUpdate": "2025-02-13"
+    },
+    {
+      "company": "",
+      "ticker": "TCBP",
+      "totalDrugs": 25,
+      "totalEvents": 1,
+      "latestUpdate": "2025-02-13"
+    },
+    {
+      "company": "",
+      "ticker": "VERU",
+      "totalDrugs": 25,
+      "totalEvents": 1,
+      "latestUpdate": "2025-02-13"
+    },
+    {
+      "company": "",
+      "ticker": "OPHLF.PK",
+      "totalDrugs": 25,
+      "totalEvents": 1,
+      "latestUpdate": "2025-02-17"
+    },
+    {
+      "company": "",
+      "ticker": "ALPMY",
+      "totalDrugs": 25,
+      "totalEvents": 1,
+      "latestUpdate": "2025-02-26"
+    },
+    {
+      "company": "",
+      "ticker": "SCPH",
+      "totalDrugs": 25,
+      "totalEvents": 1,
+      "latestUpdate": "2025-03-06"
+    },
+    {
+      "company": "",
+      "ticker": "SPRY",
+      "totalDrugs": 25,
+      "totalEvents": 1,
+      "latestUpdate": "2025-03-06"
+    },
+    {
+      "company": "",
+      "ticker": "OGN",
+      "totalDrugs": 25,
+      "totalEvents": 1,
+      "latestUpdate": "2025-03-12"
+    },
+    {
+      "company": "",
+      "ticker": "ALDX",
+      "totalDrugs": 25,
+      "totalEvents": 1,
+      "latestUpdate": "2025-04-02"
+    },
+    {
+      "company": "",
+      "ticker": "EXEL",
+      "totalDrugs": 25,
+      "totalEvents": 1,
+      "latestUpdate": "2025-04-03"
+    },
+    {
+      "company": "",
+      "ticker": "ARGX",
+      "totalDrugs": 25,
+      "totalEvents": 1,
+      "latestUpdate": "2025-04-10"
+    },
+    {
+      "company": "",
+      "ticker": "INZY",
+      "totalDrugs": 25,
+      "totalEvents": 1,
+      "latestUpdate": "2025-05-01"
+    },
+    {
+      "company": "",
+      "ticker": "SAVA",
+      "totalDrugs": 25,
+      "totalEvents": 1,
+      "latestUpdate": "2025-05-01"
+    },
+    {
+      "company": "",
+      "ticker": "IOBT",
+      "totalDrugs": 25,
+      "totalEvents": 1,
+      "latestUpdate": "2025-07-01"
+    }
+  ]
+}

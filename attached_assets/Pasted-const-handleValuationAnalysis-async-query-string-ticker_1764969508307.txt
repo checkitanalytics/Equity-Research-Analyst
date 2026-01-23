@@ -1,0 +1,154 @@
+const handleValuationAnalysis = async (
+  query: string,
+  ticker: string,
+  companyName?: string | null,
+) => {
+  try {
+    const loadingMsg = await createAgentMessage(
+      `<strong>🎯 Valuation Analysis</strong><br>Running comprehensive analysis for <strong>${companyName || ticker}</strong>...<br><br><em>⏱️ This takes 10-15 seconds (DCF + Relative Valuation + AI)</em>`,
+    );
+    setMessages((prev) => [...prev, loadingMsg]);
+
+    console.log("💰 Calling valuation API for:", ticker);
+
+    const response = await fetch(
+      `${LOCAL_API_BASE_URL}/api/valuation-analysis`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ticker: ticker,
+          query: query,
+        }),
+      },
+    );
+
+    if (!response.ok) {
+      throw new Error(`API call failed: ${response.status}`);
+    }
+
+    const valuationData = await response.json();
+
+    // ✅ 修改：构建显示两种估值方法结果的 HTML
+    let content = `
+      <div style="padding: 20px;">
+        <h2 style="color: #1e40af; margin-bottom: 20px;">💰 Comprehensive Valuation Analysis - ${companyName || ticker}</h2>
+        
+        <!-- 当前股价 -->
+        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+          <strong>Current Price:</strong> $${valuationData.current_price?.toFixed(2) || 'N/A'}
+        </div>
+
+        <!-- DCF 分析结果 -->
+        <div style="background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%); 
+                    padding: 20px; border-radius: 10px; margin-bottom: 20px; 
+                    border-left: 4px solid #0284c7;">
+          <h3 style="color: #075985; margin-bottom: 15px;">📊 DCF Analysis</h3>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div>
+              <strong>Target Price:</strong> $${valuationData.valuations?.dcf?.target_price?.toFixed(2) || 'N/A'}
+            </div>
+            <div>
+              <strong>Upside:</strong> 
+              <span style="color: ${parseFloat(valuationData.valuations?.dcf?.upside_percentage) > 0 ? '#10b981' : '#ef4444'}; font-weight: bold;">
+                ${valuationData.valuations?.dcf?.upside_percentage || '0'}%
+              </span>
+            </div>
+            <div>
+              <strong>Cost of Equity:</strong> ${(valuationData.valuations?.dcf?.cost_of_equity * 100)?.toFixed(2) || 'N/A'}%
+            </div>
+            <div>
+              <strong>Terminal Value:</strong> $${(valuationData.valuations?.dcf?.terminal_value / 1000000)?.toFixed(0) || 'N/A'}M
+            </div>
+          </div>
+          <div style="margin-top: 10px; font-size: 0.9em; color: #64748b;">
+            <em>Based on ${valuationData.valuations?.dcf?.assumptions?.projection_years || 5} year projections with ${((valuationData.valuations?.dcf?.assumptions?.terminal_growth || 0.025) * 100).toFixed(1)}% terminal growth</em>
+          </div>
+        </div>
+
+        <!-- 相对估值结果 -->
+        <div style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); 
+                    padding: 20px; border-radius: 10px; margin-bottom: 20px;
+                    border-left: 4px solid #f59e0b;">
+          <h3 style="color: #92400e; margin-bottom: 15px;">📈 Relative Valuation</h3>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div>
+              <strong>Target Price (Median):</strong> $${valuationData.valuations?.relative?.median_estimate?.toFixed(2) || 'N/A'}
+            </div>
+            <div>
+              <strong>Upside:</strong> 
+              <span style="color: ${parseFloat(valuationData.valuations?.relative?.upside_percentage) > 0 ? '#10b981' : '#ef4444'}; font-weight: bold;">
+                ${valuationData.valuations?.relative?.upside_percentage || '0'}%
+              </span>
+            </div>
+            <div>
+              <strong>Valuation Range:</strong> ${valuationData.valuations?.relative?.valuation_range || 'N/A'}
+            </div>
+            <div>
+              <strong>Peer Companies:</strong> ${valuationData.valuations?.relative?.peer_count || 0}
+            </div>
+          </div>
+          <div style="margin-top: 10px; font-size: 0.9em; color: #64748b;">
+            <em>Based on comparison with: ${valuationData.valuations?.relative?.peers?.join(', ') || 'N/A'}</em>
+          </div>
+        </div>
+
+        <!-- AI 推荐 -->
+        <div style="background: linear-gradient(135deg, #e9d5ff 0%, #c084fc 100%); 
+                    padding: 20px; border-radius: 10px;
+                    border-left: 4px solid #9333ea;">
+          <h3 style="color: #6b21a8; margin-bottom: 15px;">🤖 AI Recommendation</h3>
+          <div style="margin-bottom: 10px;">
+            <strong>Selected Method:</strong> 
+            <span style="background: white; padding: 4px 8px; border-radius: 4px; font-weight: bold;">
+              ${valuationData.ai_recommendation?.chosen_method || valuationData.method || 'N/A'}
+            </span>
+          </div>
+          <div style="margin-bottom: 10px;">
+            <strong>Final Target Price:</strong> 
+            <span style="font-size: 1.2em; font-weight: bold; color: #6b21a8;">
+              $${valuationData.ai_recommendation?.chosen_price?.toFixed(2) || valuationData.target_price?.toFixed(2) || 'N/A'}
+            </span>
+            <span style="color: ${parseFloat(valuationData.ai_recommendation?.upside_percentage || valuationData.upside_percentage) > 0 ? '#10b981' : '#ef4444'}; font-weight: bold; margin-left: 10px;">
+              (${valuationData.ai_recommendation?.upside_percentage || valuationData.upside_percentage || '0'}%)
+            </span>
+          </div>
+          <div style="margin-bottom: 10px;">
+            <strong>Recommendation:</strong> 
+            <span style="background: ${
+              (valuationData.ai_recommendation?.recommendation || valuationData.recommendation) === 'BUY' ? '#10b981' : 
+              (valuationData.ai_recommendation?.recommendation || valuationData.recommendation) === 'SELL' ? '#ef4444' : '#f59e0b'
+            }; color: white; padding: 4px 12px; border-radius: 6px; font-weight: bold;">
+              ${valuationData.ai_recommendation?.recommendation || valuationData.recommendation || 'HOLD'}
+            </span>
+          </div>
+          <div style="margin-top: 15px; padding: 10px; background: rgba(255,255,255,0.5); border-radius: 6px;">
+            <strong>Rationale:</strong> ${valuationData.ai_recommendation?.rationale || valuationData.rationale || 'Analysis completed'}
+          </div>
+          <div style="margin-top: 10px; font-size: 0.9em; color: #64748b;">
+            <em>Confidence Level: ${((valuationData.ai_recommendation?.confidence || valuationData.confidence || 0.7) * 100).toFixed(0)}%</em>
+          </div>
+        </div>
+      </div>
+    `;
+
+    // 如果 API 返回的是旧格式（response 字段），则使用原始 HTML
+    if (valuationData.response && !valuationData.valuations) {
+      content = valuationData.response;
+    }
+
+    const resultsMsg = await createAgentMessage(content, ["valuation"]);
+    setMessages((prev) => [...prev, resultsMsg]);
+
+  } catch (error) {
+    console.error("Error calling valuation API:", error);
+    const errorMsg = await createAgentMessage(
+      `<strong>❌ Error</strong><br>Failed to perform valuation analysis. ${error instanceof Error ? error.message : "Unknown error"}<br><br><em>Tip: Try "Is Tesla undervalued?" or "Should I buy AAPL?"</em>`,
+    );
+    setMessages((prev) => [...prev, errorMsg]);
+  } finally {
+    setIsLoading(false);
+  }
+};

@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "ticker": "AAPL",
+  "summary": "Earnings content provided is insufficient for a meaningful summary as it contains repetitive placeholder text without actual financial data or details.",
+  "issues": [
+    "Insufficient or placeholder content in earnings report",
+    "No specific financial metrics or performance indicators mentioned"
+  ],
+  "sentiment": "neutral"
+}

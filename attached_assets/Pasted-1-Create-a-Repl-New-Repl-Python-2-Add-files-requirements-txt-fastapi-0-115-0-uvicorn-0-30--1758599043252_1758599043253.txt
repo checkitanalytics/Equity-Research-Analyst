@@ -1,0 +1,118 @@
+1) Create a Repl
+
+New Repl → Python
+
+2) Add files
+
+requirements.txt
+
+fastapi==0.115.0
+uvicorn==0.30.5
+httpx==0.27.2
+beautifulsoup4==4.12.3
+
+
+main.py
+
+import os
+from typing import List, Optional
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel, Field
+import httpx
+from bs4 import BeautifulSoup
+from fastapi.middleware.cors import CORSMiddleware
+
+SMARTNEWS_API_URL = os.getenv(
+    "SMARTNEWS_API_URL",
+    "https://perplexity-insight-yiw185.replit.app/api/news"
+)
+
+app = FastAPI(title="SmartNews API", version="1.0.0")
+app.add_middleware(
+    CORSMiddleware, allow_origins=["*"], allow_credentials=True,
+    allow_methods=["*"], allow_headers=["*"],
+)
+
+class NewsRequest(BaseModel):
+    q: Optional[str] = Field(default=None, max_length=200)
+    tickers: Optional[str] = None
+    limit: int = Field(default=10, ge=1, le=50)
+    lang: str = Field(default="en", pattern="^(en|zh)$")
+
+class NewsItem(BaseModel):
+    id: str
+    title: str
+    url: str
+    source: str
+    published_at: Optional[str] = None
+    summary: Optional[str] = ""
+    sentiment: Optional[float] = None
+    tickers: List[str] = []
+    tags: List[str] = []
+
+class NewsResponse(BaseModel):
+    items: List[NewsItem]
+    meta: dict
+
+def normalize(items: List[dict]) -> List[NewsItem]:
+    out = []
+    for it in items:
+        out.append(NewsItem(
+            id=it.get("id") or f'{it.get("source","src")}:{(it.get("title","")[:50])}',
+            title=it.get("title",""),
+            url=it.get("url") or it.get("link","") or "",
+            source=it.get("source") or it.get("publisher","") or "",
+            published_at=it.get("published_at") or it.get("date"),
+            summary=it.get("summary") or it.get("brief","") or "",
+            sentiment=it.get("sentiment"),
+            tickers=it.get("tickers") or it.get("symbols") or [],
+            tags=it.get("tags") or []
+        ))
+    return out
+
+def html_to_json(html: str) -> NewsResponse:
+    soup = BeautifulSoup(html, "html.parser")
+    items = []
+    for art in soup.find_all("article"):
+        title_el = art.find(["h1","h2","h3","a"])
+        title = (title_el.get_text(strip=True) if title_el else "") or ""
+        url = (title_el.get("href") if title_el else "") or ""
+        source_el = art.select_one("[data-source], .source")
+        source = source_el.get_text(strip=True) if source_el else ""
+        time_el = art.find("time")
+        published_at = time_el.get("datetime") if time_el else None
+        p = art.find("p")
+        summary = p.get_text(strip=True) if p else ""
+        if title:
+            items.append({"title": title, "url": url, "source": source,
+                          "published_at": published_at, "summary": summary})
+    return NewsResponse(items=normalize(items), meta={"transformed_from_html": True})
+
+@app.post("/api/news", response_model=NewsResponse)
+async def news(req: NewsRequest):
+    async with httpx.AsyncClient(timeout=20.0) as client:
+        try:
+            r = await client.post(
+                SMARTNEWS_API_URL, json=req.dict(),
+                headers={"Accept": "application/json", "Content-Type": "application/json"}
+            )
+        except httpx.RequestError as e:
+            raise HTTPException(status_code=502, detail=f"Upstream error: {e}") from e
+
+    ct = r.headers.get("content-type","")
+    if "application/json" in ct:
+        data = r.json()
+        raw = data.get("items") or data.get("results") or data.get("data") or []
+        items = normalize(raw)[:req.limit]
+        return NewsResponse(items=items, meta={"source":"upstream-json","count":len(items),"lang":req.lang})
+    elif "text/html" in ct or "<html" in r.text.lower():
+        transformed = html_to_json(r.text)
+        transformed.meta.update({"source":"html-transformed","lang":req.lang})
+        transformed.items = transformed.items[:req.limit]
+        return transformed
+    else:
+        raise HTTPException(status_code=502, detail="Unexpected upstream format (not JSON/HTML)")
+
+@app.get("/")
+async def root():
+    return {"ok": True, "service": "smartnews", "version": "1.0.0"}

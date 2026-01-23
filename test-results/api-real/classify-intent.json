@@ -1,0 +1,12 @@
+{
+  "success": true,
+  "query": "TSLA news",
+  "intent": "NEWS",
+  "confidence": 0.99,
+  "identifier": "TSLA",
+  "identifier_type": "ticker",
+  "ticker": "TSLA",
+  "company_name": "Tesla Inc.",
+  "industry": null,
+  "rationale": "Query requests news for a specific company."
+}

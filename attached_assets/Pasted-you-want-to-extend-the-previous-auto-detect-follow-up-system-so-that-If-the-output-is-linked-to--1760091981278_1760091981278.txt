@@ -1,0 +1,110 @@
+you want to extend the previous auto-detect follow-up system so that:
+
+✅ If the output is linked to multiple modules, the UI should display all relevant modules (e.g., both Earnings Analyst and Valuation Expert).
+
+Below is a clean, ready-to-drop update that keeps your previous logic but allows multiple follow-ups.
+
+1️⃣ Backend update: return multiple modules
+
+If a query touches more than one domain, just return a list instead of a string.
+
+# examples:
+return jsonify({
+    "output": answer_text,
+    "modules": ["earnings", "valuation"]   # plural now
+})
+
+
+If only one module applies, you can still send "modules": ["earnings"].
+If nothing applies → send "modules": [] or omit it.
+
+2️⃣ Frontend: show one card per module
+const MODULE_META = {
+  news:      { label: "News Analyst",      sideId: "menu-news" },
+  earnings:  { label: "Earnings Analyst",  sideId: "menu-earnings" },
+  valuation: { label: "Valuation Expert",  sideId: "menu-valuation" },
+  data:      { label: "Data Analyst",      sideId: "menu-data" },
+  fda:       { label: "FDA Calendar",      sideId: "menu-fda" }
+};
+
+function displayAssistantResponse(outputText, modules) {
+  const chatBox = document.getElementById("chat-box");
+
+  // main answer
+  const resp = document.createElement("div");
+  resp.className = "assistant-response";
+  resp.innerHTML = `<p>${outputText}</p>`;
+  chatBox.appendChild(resp);
+
+  // guard: no modules
+  if (!modules || modules.length === 0) return;
+
+  // render each relevant follow-up
+  const wrapper = document.createElement("div");
+  wrapper.className = "follow-up-wrapper";
+
+  const cardsHTML = modules
+    .filter((m) => MODULE_META[m])
+    .map((m) => {
+      const meta = MODULE_META[m];
+      return `
+        <div class="follow-up-card">
+          💬 <b>Want to go deeper?</b><br>
+          Open <b>${meta.label}</b> from the sidebar to explore more details.
+          <div style="margin-top:8px;">
+            <button class="follow-up-btn" data-target="${meta.sideId}">
+              Open ${meta.label}
+            </button>
+          </div>
+        </div>
+      `;
+    })
+    .join("");
+
+  wrapper.innerHTML = cardsHTML;
+  chatBox.appendChild(wrapper);
+
+  // bind buttons
+  wrapper.querySelectorAll(".follow-up-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const target = document.getElementById(btn.dataset.target);
+      if (target) target.click();
+    });
+  });
+
+  chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+// === After fetch ===
+const data = await resp.json();
+const modules = data.modules || (data.module ? [data.module] : []);
+displayAssistantResponse(data.output, modules);
+
+3️⃣ Minimal CSS
+.follow-up-wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.follow-up-card {
+  background: #f5f6ff;
+  border-left: 4px solid #4b49ac;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 14px;
+}
+
+.follow-up-btn {
+  border: none;
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+✅ Behavior summary
+Case	Example API response	UI behavior
+One module	{ "module": "earnings" }	1 follow-up → “Open Earnings Analyst”
+Multiple modules	{ "modules": ["earnings","valuation"] }	2 follow-ups → “Open Earnings Analyst” and “Open Valuation Expert”
+None	{ "modules": [] }	No follow-up shown

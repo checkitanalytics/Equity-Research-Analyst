@@ -1,0 +1,24 @@
+{
+  "success": true,
+  "industry": "Tech",
+  "recommendations": [
+    {
+      "symbol": "GOOGL",
+      "name": "Alphabet",
+      "rationale": "Surging stock with strong AI advantages, cloud growth at 34% YoY, and 15% EPS growth expected"
+    },
+    {
+      "symbol": "TEAM",
+      "name": "Atlassian",
+      "rationale": "Trading 44% below fair value with narrow moat, strong cloud migration and top-line growth"
+    },
+    {
+      "symbol": "AKAM",
+      "name": "Akamai Technologies",
+      "rationale": "30% below fair value, narrow moat from cybersecurity, edge computing, and cloud expansion"
+    }
+  ],
+  "summary": "Market analysis complete.",
+  "timestamp": "2026-01-23T01:00:14.004Z",
+  "source": "Perplexity AI (sonar-pro)"
+}

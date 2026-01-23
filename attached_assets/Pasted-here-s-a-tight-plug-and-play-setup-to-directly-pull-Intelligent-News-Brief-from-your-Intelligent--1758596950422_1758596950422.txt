@@ -1,0 +1,198 @@
+here’s a tight, plug-and-play setup to directly pull “Intelligent News Brief” from your Intelligent Stock News Analyst app via your /api/smartnews proxy. It includes:
+
+a convenience backend route that always requests the “brief only” payload, and
+
+simple front-end helpers + React Query hook to render it.
+
+1) Backend (Node/Express) — add a convenience route
+// server.ts / index.js (Express)
+import express from "express";
+import fetch from "node-fetch";
+
+const app = express();
+app.use(express.json());
+
+const SMARTNEWS_API_URL = process.env.SMARTNEWS_API_URL; // in Replit Secrets
+
+// Generic proxy (you already have this)
+app.post("/api/smartnews", async (req, res) => {
+  try {
+    const { endpoint = "/api/news", method = "GET", data } = req.body || {};
+    const url = `${SMARTNEWS_API_URL}${endpoint}`;
+    const resp = await fetch(url, {
+      method,
+      headers: { "Content-Type": "application/json" },
+      body: ["GET", "HEAD"].includes(method.toUpperCase()) ? undefined : JSON.stringify(data || {})
+    });
+    if (!resp.ok) {
+      return res.status(resp.status).json({ error: `SmartNews error ${resp.status}` });
+    }
+    const json = await resp.json();
+    return res.json(json);
+  } catch (e) {
+    console.error("SmartNews proxy error:", e);
+    return res.status(500).json({ error: "Failed to call SmartNews" });
+  }
+});
+
+/**
+ * Convenience route: always fetch the "Intelligent News Brief" only.
+ * Contract we send to SmartNews:
+ *  - endpoint: /api/news
+ *  - body: { mode: "brief", briefOnly: true, subgrouping: true, q, lang, limit, source }
+ */
+app.post("/api/intelligent-news-brief", async (req, res) => {
+  try {
+    const { q = "", lang = "en", limit = 25, source = "era" } = req.body || {};
+    const resp = await fetch(`${SMARTNEWS_API_URL}/api/news`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        q,
+        mode: "brief",           // tell SmartNews to return the brief
+        briefOnly: true,         // suppress everything except the brief payload
+        subgrouping: true,       // keep Fundamental/Sentiment split inside the brief
+        lang,                    // "en" | "zh"
+        limit,
+        source
+      })
+    });
+    if (!resp.ok) {
+      return res.status(resp.status).json({ error: `SmartNews error ${resp.status}` });
+    }
+    const json = await resp.json();
+
+    // Normalize: ensure we only return the brief-shaped data
+    const brief = json?.brief ?? json?.News ?? json;
+    return res.json({ brief, meta: { q, lang, limit } });
+  } catch (e) {
+    console.error("Brief route error:", e);
+    return res.status(500).json({ error: "Failed to fetch Intelligent News Brief" });
+  }
+});
+
+export default app;
+
+
+备注（中文）：上面新增的 /api/intelligent-news-brief 统一把 mode: "brief"、briefOnly: true 这些参数打包好，前端只需传 q（查询词）和 lang（语言）即可。这样不会把 SMARTNEWS_API_URL 暴露给浏览器。
+
+2) Front-end helper + React Query hook
+// api/smartnews.ts
+export const callSmartNewsAPI = async (
+  endpoint: string,
+  method: "GET" | "POST" | "PUT" | "DELETE" = "GET",
+  data?: any
+) => {
+  const resp = await fetch("/api/smartnews", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ endpoint, method, data })
+  });
+  if (!resp.ok) throw new Error("Failed to call SmartNews API");
+  return resp.json();
+};
+
+// Dedicated helper: fetch Intelligent News Brief only
+export const fetchIntelligentNewsBrief = async (q: string, lang: "en" | "zh" = "en") => {
+  const resp = await fetch("/api/intelligent-news-brief", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ q, lang })
+  });
+  if (!resp.ok) throw new Error("Failed to fetch Intelligent News Brief");
+  return resp.json() as Promise<{
+    brief: {
+      summary?: string[]; // optional
+      News?: {
+        "Fundamental News"?: { count?: number; items?: any[] };
+        "Sentiment News"?: { count?: number; items?: any[] };
+      };
+    };
+    meta: { q: string; lang: string; limit?: number };
+  }>;
+};
+
+// hooks/useIntelligentNewsBrief.ts
+import { useQuery } from "@tanstack/react-query";
+import { fetchIntelligentNewsBrief } from "../api/smartnews";
+
+export const useIntelligentNewsBrief = (q: string, lang: "en" | "zh" = "en") =>
+  useQuery({
+    queryKey: ["smartnews", "brief", q, lang],
+    queryFn: () => fetchIntelligentNewsBrief(q, lang),
+    enabled: !!q
+  });
+
+3) Minimal React component
+// components/IntelligentNewsBrief.tsx
+import React from "react";
+import { useIntelligentNewsBrief } from "../hooks/useIntelligentNewsBrief";
+
+export default function IntelligentNewsBrief({ q, lang = "en" }: { q: string; lang?: "en" | "zh" }) {
+  const { data, isLoading, error } = useIntelligentNewsBrief(q, lang);
+
+  if (isLoading) return <div>Loading Intelligent News Brief…</div>;
+  if (error) return <div>Failed to load Intelligent News Brief.</div>;
+
+  const brief = data?.brief;
+  const fundamental = brief?.News?.["Fundamental News"];
+  const sentiment = brief?.News?.["Sentiment News"];
+
+  return (
+    <div className="space-y-4">
+      {/* Optional summary bullets */}
+      {brief?.summary?.length ? (
+        <div>
+          <h3 className="font-semibold">Summary</h3>
+          <ul className="list-disc ml-5">
+            {brief.summary.map((s, i) => <li key={i}>{s}</li>)}
+          </ul>
+        </div>
+      ) : null}
+
+      <section>
+        <h3 className="font-semibold">Fundamental News</h3>
+        {!fundamental?.items?.length ? (
+          <div>No items yet</div>
+        ) : (
+          <ul className="list-disc ml-5">
+            {fundamental.items.map((it: any, i: number) => (
+              <li key={i}>
+                <a href={it.url} target="_blank" rel="noreferrer">{it.title}</a>
+                {it.summary ? <div className="text-sm opacity-80">{it.summary}</div> : null}
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
+
+      <section>
+        <h3 className="font-semibold">Sentiment News</h3>
+        {!sentiment?.items?.length ? (
+          <div>No items yet</div>
+        ) : (
+          <ul className="list-disc ml-5">
+            {sentiment.items.map((it: any, i: number) => (
+              <li key={i}>
+                <a href={it.url} target="_blank" rel="noreferrer">{it.title}</a>
+                {it.summary ? <div className="text-sm opacity-80">{it.summary}</div> : null}
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
+    </div>
+  );
+}
+
+4) One-liner usage
+// Example usage
+<IntelligentNewsBrief q="Apple latest news" lang="en" />
+
+Notes
+
+Security: The browser only calls your own /api/intelligent-news-brief (or /api/smartnews)—your SMARTNEWS_API_URL stays hidden server-side.
+
+Contract: Your SmartNews backend should honor { mode: "brief", briefOnly: true, subgrouping: true } and return only the “Intelligent News Brief” (with Fundamental/Sentiment buckets).
+
+i18n: Switch lang to "zh" for Chinese output; your SmartNews app can localize headings/contents accordingly.

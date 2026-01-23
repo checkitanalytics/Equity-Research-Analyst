@@ -1,0 +1,136 @@
+5:51:19 AM [express] POST /api/smartnews 200 in 846ms :: {"response":"Good morning, and welcome to t…
+Error analyzing earnings: BadRequestError: 400 Unsupported value: 'temperature' does not support 0.1 with this model. Only the default (1) value is supported.
+    at Function.generate (/home/runner/workspace/node_modules/openai/src/core/error.ts:72:14)
+    at OpenAI.makeStatusError (/home/runner/workspace/node_modules/openai/src/client.ts:453:28)
+    at OpenAI.makeRequest (/home/runner/workspace/node_modules/openai/src/client.ts:676:24)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async <anonymous> (/home/runner/workspace/server/routes.ts:163:26) {
+  status: 400,
+  headers: Headers {
+    date: 'Sat, 30 Aug 2025 05:51:20 GMT',
+    'content-type': 'application/json',
+    'content-length': '247',
+    connection: 'keep-alive',
+    'access-control-expose-headers': 'X-Request-ID',
+    'openai-organization': 'user-ubbgpetm0qjwmp2uq3ax5yuj',
+    'openai-processing-ms': '25',
+    'openai-project': 'proj_bmSYtIaLUXma6NdvJmjzeFyU',
+    'openai-version': '2020-10-01',
+    'x-envoy-upstream-service-time': '32',
+    'x-ratelimit-limit-requests': '5000',
+    'x-ratelimit-limit-tokens': '450000',
+    'x-ratelimit-remaining-requests': '4999',
+    'x-ratelimit-remaining-tokens': '434931',
+    'x-ratelimit-reset-requests': '12ms',
+    'x-ratelimit-reset-tokens': '2.009s',
+    'x-request-id': 'req_465db72db47647f6a6b012a83c6eea3a',
+    'cf-cache-status': 'DYNAMIC',
+    'set-cookie': '__cf_bm=JR7Om7qDQ97bOA_lVwbDDAhlnNoa745cNdei3DMsZoE-1756533080-1.0.1.1-6gwHGJUKwR0LMzuPYjH9n5Epxz0RVXsgd3guFzpQfD6D4E5a0kTwO9p1nZUNRWVzxxOhKbYpcH0vnt.tx_t6eu_xzrq_CMIhsSqYcOCxAdk; path=/; expires=Sat, 30-Aug-25 06:21:20 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None, _cfuvid=8Td_0AwCiesIDH3rPxgryLDwc5oCllmnwekUCi513vI-1756533080548-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None',
+    'strict-transport-security': 'max-age=31536000; includeSubDomains; preload',
+    'x-content-type-options': 'nosniff',
+    server: 'cloudflare',
+    'cf-ray': '97720407497a8bb5-ATL',
+    'alt-svc': 'h3=":443"; ma=86400'
+  },
+  requestID: 'req_465db72db47647f6a6b012a83c6eea3a',
+  error: {
+    message: "Unsupported value: 'temperature' does not support 0.1 with this model. Only the default (1) value is supported.",
+    type: 'invalid_request_error',
+    param: 'temperature',
+    code: 'unsupported_value'
+  },
+  code: 'unsupported_value',
+  param: 'temperature',
+  type: 'invalid_request_error'
+}
+5:51:20 AM [express] POST /api/analyze-earnings 500 in 468ms :: {"error":"Failed to analyze earnings…
+Error analyzing earnings: BadRequestError: 400 Unsupported value: 'temperature' does not support 0.1 with this model. Only the default (1) value is supported.
+    at Function.generate (/home/runner/workspace/node_modules/openai/src/core/error.ts:72:14)
+    at OpenAI.makeStatusError (/home/runner/workspace/node_modules/openai/src/client.ts:453:28)
+    at OpenAI.makeRequest (/home/runner/workspace/node_modules/openai/src/client.ts:676:24)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async <anonymous> (/home/runner/workspace/server/routes.ts:163:26) {
+  status: 400,
+  headers: Headers {
+    date: 'Sat, 30 Aug 2025 05:51:20 GMT',
+    'content-type': 'application/json',
+    'content-length': '247',
+    connection: 'keep-alive',
+    'access-control-expose-headers': 'X-Request-ID',
+    'openai-organization': 'user-ubbgpetm0qjwmp2uq3ax5yuj',
+    'openai-processing-ms': '9',
+    'openai-project': 'proj_bmSYtIaLUXma6NdvJmjzeFyU',
+    'openai-version': '2020-10-01',
+    'x-envoy-upstream-service-time': '12',
+    'x-ratelimit-limit-requests': '5000',
+    'x-ratelimit-limit-tokens': '450000',
+    'x-ratelimit-remaining-requests': '4999',
+    'x-ratelimit-remaining-tokens': '433211',
+    'x-ratelimit-reset-requests': '12ms',
+    'x-ratelimit-reset-tokens': '2.238s',
+    'x-request-id': 'req_a4f32d415fdc4f8e844802b98bd311fb',
+    'cf-cache-status': 'DYNAMIC',
+    'set-cookie': '__cf_bm=GrR8SKyzv1hYFZaOAwqJwlD7vpjink2Ceep.25Wyauw-1756533080-1.0.1.1-N88JC5P40Q5IHKAZlxuvFTPIVLjxh0u6HFasGNB3P5kyFrwjhH9cinBZM0wOybIXqv_L5GxlkYAk_i8qkpF84GEjci_DNLmmiOkhjsqchRs; path=/; expires=Sat, 30-Aug-25 06:21:20 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None, _cfuvid=nC6imIYTnLwJBesIvR90YI8EdfoaP0wsRISIlGw7axs-1756533080988-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None',
+    'strict-transport-security': 'max-age=31536000; includeSubDomains; preload',
+    'x-content-type-options': 'nosniff',
+    server: 'cloudflare',
+    'cf-ray': '9772040b6c3abd30-ATL',
+    'alt-svc': 'h3=":443"; ma=86400'
+  },
+  requestID: 'req_a4f32d415fdc4f8e844802b98bd311fb',
+  error: {
+    message: "Unsupported value: 'temperature' does not support 0.1 with this model. Only the default (1) value is supported.",
+    type: 'invalid_request_error',
+    param: 'temperature',
+    code: 'unsupported_value'
+  },
+  code: 'unsupported_value',
+  param: 'temperature',
+  type: 'invalid_request_error'
+}
+5:51:20 AM [express] POST /api/analyze-earnings 500 in 186ms :: {"error":"Failed to analyze earnings…
+Error analyzing earnings: BadRequestError: 400 Unsupported value: 'temperature' does not support 0.1 with this model. Only the default (1) value is supported.
+    at Function.generate (/home/runner/workspace/node_modules/openai/src/core/error.ts:72:14)
+    at OpenAI.makeStatusError (/home/runner/workspace/node_modules/openai/src/client.ts:453:28)
+    at OpenAI.makeRequest (/home/runner/workspace/node_modules/openai/src/client.ts:676:24)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async <anonymous> (/home/runner/workspace/server/routes.ts:163:26) {
+  status: 400,
+  headers: Headers {
+    date: 'Sat, 30 Aug 2025 05:51:21 GMT',
+    'content-type': 'application/json',
+    'content-length': '247',
+    connection: 'keep-alive',
+    'access-control-expose-headers': 'X-Request-ID',
+    'openai-organization': 'user-ubbgpetm0qjwmp2uq3ax5yuj',
+    'openai-processing-ms': '21',
+    'openai-project': 'proj_bmSYtIaLUXma6NdvJmjzeFyU',
+    'openai-version': '2020-10-01',
+    'x-envoy-upstream-service-time': '36',
+    'x-ratelimit-limit-requests': '5000',
+    'x-ratelimit-limit-tokens': '450000',
+    'x-ratelimit-remaining-requests': '4999',
+    'x-ratelimit-remaining-tokens': '429594',
+    'x-ratelimit-reset-requests': '12ms',
+    'x-ratelimit-reset-tokens': '2.72s',
+    'x-request-id': 'req_8954fe19c6ed474a853c601f918ae1fa',
+    'cf-cache-status': 'DYNAMIC',
+    'set-cookie': '__cf_bm=iT0QQG.uxZXOpmfj5uyHlKjiVqJ5bWO1Ez5HmJruVV0-1756533081-1.0.1.1-DDLVJ6Me2dWgvjVGess79JdokOc3rvMbhyCQ6621ZljCQBikyX4GeSDYz19TEu_af9kmPW567O.kE5DeYyxUOS4exLK508dOHlRjKp.ECls; path=/; expires=Sat, 30-Aug-25 06:21:21 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None, _cfuvid=kbSgCGTvoexsqcU8CQ7R8.MdCfbN4sAY4dP5Ly_SF24-1756533081076-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None',
+    'strict-transport-security': 'max-age=31536000; includeSubDomains; preload',
+    'x-content-type-options': 'nosniff',
+    server: 'cloudflare',
+    'cf-ray': '9772040a8dff8bb5-ATL',
+    'alt-svc': 'h3=":443"; ma=86400'
+  },
+  requestID: 'req_8954fe19c6ed474a853c601f918ae1fa',
+  error: {
+    message: "Unsupported value: 'temperature' does not support 0.1 with this model. Only the default (1) value is supported.",
+    type: 'invalid_request_error',
+    param: 'temperature',
+    code: 'unsupported_value'
+  },
+  code: 'unsupported_value',
+  param: 'temperature',
+  type: 'invalid_request_error'
+}
+5:51:21 AM [express] POST /api/analyze-earnings 500 in 369ms :: {"error":"Failed to analyze earnings…

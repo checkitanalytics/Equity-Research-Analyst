@@ -1,0 +1,48 @@
+“Build an intent-based workflow router in the Equity Research Analyst module:
+
+Case 1 – Company News / Rumors / Product or Drug Launch
+If the user asks about company news, rumor verification, new product launches, or new drug releases → go into Intelligent Stock News Analyst.
+
+Case 2 – Earnings / Financial Analysis
+If the user asks about company earnings (financial statement analysis, earnings date, earnings preview, guidance, revenue, EPS, margins, etc.) → go into Earning Call Specialist.
+
+Case 3 – Valuation
+If the user asks about valuation (short-term or long-term valuation, price targets, DCF, multiples, intrinsic value, etc.) → go into Valuation Expert.
+
+The system should automatically detect the intent based on user input and route them to the correct module.”
+
+Code-Ready Routing Snippet (JS/React style)
+function routeEquityResearchIntent(userInput) {
+  const text = (userInput || "").toLowerCase();
+
+  // News & Rumors
+  const newsKeywords = ["news","headline","rumor","verify","launch","release","drug","fda","trial","approval","catalyst"];
+  // Earnings & Financials
+  const earningsKeywords = ["earnings","financial","guidance","revenue","eps","margin","cash flow","balance sheet","preview","call","transcript"];
+  // Valuation
+  const valuationKeywords = ["valuation","dcf","price target","intrinsic value","pe","p/e","ps","ev/ebitda","fair value","bull case","bear case"];
+
+  const matchesAny = (arr) => arr.some(k => text.includes(k));
+
+  if (matchesAny(newsKeywords)) {
+    navigateTo("Intelligent Stock News Analyst");
+    return;
+  }
+  if (matchesAny(earningsKeywords)) {
+    navigateTo("Earning Call Specialist");
+    return;
+  }
+  if (matchesAny(valuationKeywords)) {
+    navigateTo("Valuation Expert");
+    return;
+  }
+
+  // Default fallback
+  navigateTo("Intelligent Stock News Analyst");
+}
+
+// Example implementation for navigation
+function navigateTo(moduleName) {
+  console.log(`Switching to module: ${moduleName}`);
+  // setActiveModule(moduleName); // your UI navigation logic
+}

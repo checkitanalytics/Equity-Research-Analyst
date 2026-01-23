@@ -1,0 +1,14 @@
+{
+  "success": true,
+  "query": "What is Tesla?",
+  "answer": "<strong>💡 Answer</strong><br><br><strong>Tesla, Inc. is an American multinational automotive and clean energy company headquartered in Austin, Texas, that designs, manufactures, and sells battery electric vehicles (BEVs), solar panels, solar shingles, and energy storage products like Powerwall and Megapack.</strong><br><br>Founded on July 1, 2003, as Tesla Motors by engineers Martin Eberhard and Marc Tarpenning, the company was named after inventor Nikola Tesla and initially focused on electric sports cars like the Roadster, launched in 2008 with funding from Elon Musk, who became chairman in 2004 and later CEO. It rebranded to Tesla, Inc. in 2017 to reflect its expanded energy business, including the 2016 acquisition of SolarCity.<br><br>### Key Business Segments (as of 2025)<br>- <strong>Automotive</strong>: Largest segment, producing models like Model S, Model 3, Model X, Model Y, Cybertruck, and Tesla Semi; generated ~$77 billion in 2024 revenue from sales, leasing, and features like Full Self-Driving (FSD) software.<br>- <strong>Energy Generation and Storage</strong>: Solar systems, Powerwall (home), Powerpack, and Megapack (grid-scale); ~$10 billion in 2024 revenue, a growing portion of business.<br><br>Tesla operates six vertically integrated factories across three continents with over 100,000 employees, emphasizing in-house design, manufacturing, and a mission to accelerate sustainable energy and shift from fossil fuels. Under Elon Musk's leadership, it pioneered high-performance EVs, continuous hardware updates, and innovations in batteries, automation, and robotics, though it faced challenges like production delays and competition. In 2024–2025, focus shifted toward Model Y, Cybertruck, product development, and market pressures.",
+  "citations": [
+    "https://www.britannica.com/money/Tesla-Motors",
+    "https://en.wikipedia.org/wiki/Tesla,_Inc.",
+    "https://www.ebsco.com/research-starters/business-and-management/tesla-inc",
+    "https://www.tesla.com/elon-musk",
+    "https://www.tesla.com/about",
+    "https://ir.tesla.com"
+  ],
+  "timestamp": "2026-01-23T01:00:19.847Z"
+}

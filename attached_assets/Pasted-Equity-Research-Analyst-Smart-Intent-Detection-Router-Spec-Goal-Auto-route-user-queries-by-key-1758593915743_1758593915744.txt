@@ -1,0 +1,91 @@
+Equity Research Analyst — Smart Intent Detection (Router Spec)
+
+Goal: Auto-route user queries by keyword intent.
+
+Intents & Destinations
+
+Company News / Rumors / Product Launches
+
+Route to: Intelligent Stock News Analyst
+
+URL: https://smartnews.checkitanalytics.com/
+
+Action: Run Intelligent News Brief automatically.
+
+Output constraint: Show only the “Intelligent News Brief” results (suppress other sections/cards).
+
+Earnings / Financial Performance Analysis
+
+Route to: Earning Call Specialist
+
+URL: https://smartnews.checkitanalytics.com/rag
+
+Action: Run chatbot with the same user query.
+
+Output constraint: Return chatbot response only.
+
+Classification (case-insensitive keyword match on the raw user query)
+
+NEWS/RUMOR/PRODUCT trigger words (any → News route):
+news, headline, rumor, hearsay, leak, product, launch, unveil, release, event, partnership, acquisition, M&A, divest, recall, lawsuit, regulatory, SEC, management change, CEO, CFO, layoff, hiring, expansion, market entry, technology, prototype
+
+EARNINGS/FINANCIAL trigger words (any → Earnings route):
+earnings, EPS, revenue, sales, guidance, outlook, margin, GAAP, non-GAAP, Q1, Q2, Q3, Q4, FY, fiscal, preview, results, call, transcript, Q&A, beat, miss, YoY, QoQ
+
+Tie-breaker: If both buckets match, prefer Earnings.
+
+Pass-through Query
+Always pass the original user query string verbatim to the destination module (no rewriting).
+
+Navigation & Auto-Run
+
+For News: navigate to https://smartnews.checkitanalytics.com/?q=<encoded_query>&auto=brief&source=era and programmatically trigger the Intelligent News Brief action; render only that result.
+
+For Earnings: navigate to https://smartnews.checkitanalytics.com/rag?q=<encoded_query>&source=era and initialize the chatbot with the query.
+
+Examples
+
+“What’s the latest news on Apple?” → News route → output: Intelligent News Brief only.
+
+“Tesla earnings preview” → Earnings route → output: Earning Call Specialist chatbot response.
+
+Minimal router (TS/JS pseudocode)
+
+const NEWS_KEYS = [
+  "news","headline","rumor","hearsay","leak","product","launch","unveil","release",
+  "event","partnership","acquisition","m&a","divest","recall","lawsuit","regulatory",
+  "sec","management change","ceo","cfo","layoff","hiring","expansion","market entry",
+  "technology","prototype"
+];
+
+const EARNINGS_KEYS = [
+  "earnings","eps","revenue","sales","guidance","outlook","margin","gaap","non-gaap",
+  "q1","q2","q3","q4","fy","fiscal","preview","results","call","transcript","q&a",
+  "beat","miss","yoy","qoq"
+];
+
+function matchesAny(q: string, keys: string[]) {
+  const t = q.toLowerCase();
+  return keys.some(k => t.includes(k));
+}
+
+export function routeQuery(rawQuery: string) {
+  const isNews = matchesAny(rawQuery, NEWS_KEYS);
+  const isEarnings = matchesAny(rawQuery, EARNINGS_KEYS);
+
+  if (isEarnings || (isNews && isEarnings)) {
+    // Earnings wins on ties
+    const url = `https://smartnews.checkitanalytics.com/rag?q=${encodeURIComponent(rawQuery)}&source=era`;
+    window.location.href = url;
+    return "EARNINGS";
+  } else if (isNews) {
+    const url = `https://smartnews.checkitanalytics.com/?q=${encodeURIComponent(rawQuery)}&auto=brief&source=era`;
+    window.location.href = url;
+    return "NEWS";
+  } else {
+    // Default to News if unclear
+    const url = `https://smartnews.checkitanalytics.com/?q=${encodeURIComponent(rawQuery)}&auto=brief&source=era`;
+    window.location.href = url;
+    return "NEWS_DEFAULT";
+  }
+}
