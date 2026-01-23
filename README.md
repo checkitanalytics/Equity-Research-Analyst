@@ -47,6 +47,7 @@ If you want the server to read `.env.local`, add an explicit `dotenv.config({ pa
 ## Interface Coverage Map (by module)
 
 Legend:
+
 - E2E (frontend flow): `tests/e2e/modules.spec.ts`
 - E2E (API mock): `tests/e2e/api.mock.spec.ts`
 - E2E (API real): `tests/e2e/api.real.spec.ts`
@@ -54,88 +55,92 @@ Legend:
 
 ### Frontend direct-connect interfaces (as in `client/src/pages/home.tsx`)
 
-| Interface | Module | E2E (frontend flow) | E2E (API mock/real) | Unit | Notes |
-| --- | --- | --- | --- | --- | --- |
-| `/api/search-news-v2` | News | `News module hits search-news-v2 and create-smart-brief` | - | - | SmartNews direct |
-| `/api/create-smart-brief` | News | `News module hits search-news-v2 and create-smart-brief` | - | - | SmartNews direct |
-| `/api/detect-rumor` | Rumor | `Rumor module hits detect-rumor` | - | - | SmartNews direct |
-| `/api/newsbrief` | News Brief | `News brief module hits newsbrief` | - | - | SmartNews direct |
-| `/api/search-news` | Screening | `Screening module hits recommend-stocks and follow-up APIs` | - | - | SmartNews direct |
-| `/api/rag-search` | Screening | `Screening module hits recommend-stocks and follow-up APIs` | - | - | SmartNews direct |
-| `/api/earnings/latest-transcript/:ticker` | Earnings | `Earnings summary uses latest-transcript and ai-doc` + `Earnings transcript uses latest-transcript and ninjas/transcript` | - | - | SmartNews direct |
-| `/api/earnings/ai-doc?docType=summary` | Earnings | `Earnings summary uses latest-transcript and ai-doc` | - | - | SmartNews direct |
-| `/api/earnings/ai-doc?docType=qa` | Earnings | `Earnings Q&A uses ai-doc qa` | - | - | SmartNews direct |
-| `/api/ninjas/transcript` | Earnings | `Earnings transcript uses latest-transcript and ninjas/transcript` | - | - | SmartNews direct |
-| `/api/twitter-search` | Twitter | `Twitter module hits twitter-search and twitter-consolidate` | - | - | SmartNews direct |
-| `/api/twitter-consolidate` | Twitter | `Twitter module hits twitter-search and twitter-consolidate` | - | - | SmartNews direct |
-| `https://keymetrics.checkitanalytics.com/api/resolve` | Performance | `Performance module hits keymetrics endpoints` | - | - | Keymetrics direct |
-| `https://keymetrics.checkitanalytics.com/api/find-peers` | Performance | `Performance module hits keymetrics endpoints` | - | - | Keymetrics direct |
-| `https://keymetrics.checkitanalytics.com/api/get-metrics` | Performance | `Performance module hits keymetrics endpoints` | - | - | Keymetrics direct |
-| `https://keymetrics.checkitanalytics.com/api/peer-key-metrics-conclusion` | Performance | `Performance module hits keymetrics endpoints` | - | - | Keymetrics direct |
+| Interface                                                                 | Module      | E2E (frontend flow)                                                                                                       | E2E (API mock/real) | Unit | Notes             |
+| ------------------------------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------- | ---- | ----------------- |
+| `/api/search-news-v2`                                                     | News        | `News module hits search-news-v2 and create-smart-brief`                                                                  | -                   | -    | SmartNews direct  |
+| `/api/create-smart-brief`                                                 | News        | `News module hits search-news-v2 and create-smart-brief`                                                                  | -                   | -    | SmartNews direct  |
+| `/api/detect-rumor`                                                       | Rumor       | `Rumor module hits detect-rumor`                                                                                          | -                   | -    | SmartNews direct  |
+| `/api/newsbrief`                                                          | News Brief  | `News brief module hits newsbrief`                                                                                        | -                   | -    | SmartNews direct  |
+| `/api/search-news`                                                        | Screening   | `Screening module hits recommend-stocks and follow-up APIs`                                                               | -                   | -    | SmartNews direct  |
+| `/api/rag-search`                                                         | Screening   | `Screening module hits recommend-stocks and follow-up APIs`                                                               | -                   | -    | SmartNews direct  |
+| `/api/earnings/latest-transcript/:ticker`                                 | Earnings    | `Earnings summary uses latest-transcript and ai-doc` + `Earnings transcript uses latest-transcript and ninjas/transcript` | -                   | -    | SmartNews direct  |
+| `/api/earnings/ai-doc?docType=summary`                                    | Earnings    | `Earnings summary uses latest-transcript and ai-doc`                                                                      | -                   | -    | SmartNews direct  |
+| `/api/earnings/ai-doc?docType=qa`                                         | Earnings    | `Earnings Q&A uses ai-doc qa`                                                                                             | -                   | -    | SmartNews direct  |
+| `/api/ninjas/transcript`                                                  | Earnings    | `Earnings transcript uses latest-transcript and ninjas/transcript`                                                        | -                   | -    | SmartNews direct  |
+| `/api/twitter-search`                                                     | Twitter     | `Twitter module hits twitter-search and twitter-consolidate`                                                              | -                   | -    | SmartNews direct  |
+| `/api/twitter-consolidate`                                                | Twitter     | `Twitter module hits twitter-search and twitter-consolidate`                                                              | -                   | -    | SmartNews direct  |
+| `https://keymetrics.checkitanalytics.com/api/resolve`                     | Performance | `Performance module hits keymetrics endpoints`                                                                            | -                   | -    | Keymetrics direct |
+| `https://keymetrics.checkitanalytics.com/api/find-peers`                  | Performance | `Performance module hits keymetrics endpoints`                                                                            | -                   | -    | Keymetrics direct |
+| `https://keymetrics.checkitanalytics.com/api/get-metrics`                 | Performance | `Performance module hits keymetrics endpoints`                                                                            | -                   | -    | Keymetrics direct |
+| `https://keymetrics.checkitanalytics.com/api/peer-key-metrics-conclusion` | Performance | `Performance module hits keymetrics endpoints`                                                                            | -                   | -    | Keymetrics direct |
 
-### Backend interfaces (/api/*)
+### Backend interfaces (/api/\*)
 
-| Interface | Module | E2E (frontend flow) | E2E (API mock/real) | Unit | Notes |
-| --- | --- | --- | --- | --- | --- |
-| `/api/translate` | i18n | `Chinese input triggers translate before classify` | `translate` | `translate validates input and missing API key` | Mock/real coverage in API suite |
-| `/api/classify-intent` | Router | Used by most module tests | `classify-intent` | `validates classify-intent payload` | Used as entrypoint |
-| `/api/competitive-analysis` | Competitive | `Competitive module hits /api/competitive-analysis` | `competitive-analysis` | `/competitive-analysis requires companyName and industry` | - |
-| `/api/valuation-analysis` | Valuation | `Valuation module hits /api/valuation-analysis` + Screening flow | `valuation-analysis` | `/valuation-analysis requires ticker` | - |
-| `/api/analyze-redflags` | Screening | `Screening module hits recommend-stocks and follow-up APIs` | `analyze-redflags` | `validates payload and handles missing API key` | - |
-| `/api/summarize-earnings` | Screening | `Screening module hits recommend-stocks and follow-up APIs` | `summarize-earnings` | `requires ticker and handles short content` | - |
-| `/api/recommend-stocks` | Screening | `Screening module hits recommend-stocks and follow-up APIs` | `recommend-stocks` | `validates input and missing API key` | - |
-| `/api/general-qa` | General | `General module hits /api/general-qa` | `general-qa` | `validates input and missing API key` | - |
-| `/api/fda/companies` | FDA | `FDA module hits /api/fda/companies/:identifier` | `fda companies` | `FDA proxy routes return mocked data` | includes `:ticker` + `?company=` |
-| `/api/earnings/query` | Earnings | - | `earnings/query` | `/earnings/query validates required params` | server proxy to SmartNews |
-| `/api/parse-earnings-query` | Earnings | - | `parse-earnings-query` | `/parse-earnings-query requires query` | server helper route |
-| `/api/earnings-fallback` | Earnings | - | `earnings-fallback` | `/earnings-fallback validates input and missing API key` | server fallback route |
+| Interface                   | Module      | E2E (frontend flow)                                              | E2E (API mock/real)    | Unit                                                      | Notes                            |
+| --------------------------- | ----------- | ---------------------------------------------------------------- | ---------------------- | --------------------------------------------------------- | -------------------------------- |
+| `/api/translate`            | i18n        | `Chinese input triggers translate before classify`               | `translate`            | `translate validates input and missing API key`           | Mock/real coverage in API suite  |
+| `/api/classify-intent`      | Router      | Used by most module tests                                        | `classify-intent`      | `validates classify-intent payload`                       | Used as entrypoint               |
+| `/api/competitive-analysis` | Competitive | `Competitive module hits /api/competitive-analysis`              | `competitive-analysis` | `/competitive-analysis requires companyName and industry` | -                                |
+| `/api/valuation-analysis`   | Valuation   | `Valuation module hits /api/valuation-analysis` + Screening flow | `valuation-analysis`   | `/valuation-analysis requires ticker`                     | -                                |
+| `/api/analyze-redflags`     | Screening   | `Screening module hits recommend-stocks and follow-up APIs`      | `analyze-redflags`     | `validates payload and handles missing API key`           | -                                |
+| `/api/summarize-earnings`   | Screening   | `Screening module hits recommend-stocks and follow-up APIs`      | `summarize-earnings`   | `requires ticker and handles short content`               | -                                |
+| `/api/recommend-stocks`     | Screening   | `Screening module hits recommend-stocks and follow-up APIs`      | `recommend-stocks`     | `validates input and missing API key`                     | -                                |
+| `/api/general-qa`           | General     | `General module hits /api/general-qa`                            | `general-qa`           | `validates input and missing API key`                     | -                                |
+| `/api/fda/companies`        | FDA         | `FDA module hits /api/fda/companies/:identifier`                 | `fda companies`        | `FDA proxy routes return mocked data`                     | includes `:ticker` + `?company=` |
+| `/api/earnings/query`       | Earnings    | -                                                                | `earnings/query`       | `/earnings/query validates required params`               | server proxy to SmartNews        |
+| `/api/parse-earnings-query` | Earnings    | -                                                                | `parse-earnings-query` | `/parse-earnings-query requires query`                    | server helper route              |
+| `/api/earnings-fallback`    | Earnings    | -                                                                | `earnings-fallback`    | `/earnings-fallback validates input and missing API key`  | server fallback route            |
 
 ## Interface Coverage Map (split by side)
 
 ### Frontend direct-connect coverage
 
-| Interface | Module | Test name (frontend flow) |
-| --- | --- | --- |
-| `/api/search-news-v2` | News | `News module hits search-news-v2 and create-smart-brief` |
-| `/api/create-smart-brief` | News | `News module hits search-news-v2 and create-smart-brief` |
-| `/api/detect-rumor` | Rumor | `Rumor module hits detect-rumor` |
-| `/api/newsbrief` | News Brief | `News brief module hits newsbrief` |
-| `/api/search-news` | Screening | `Screening module hits recommend-stocks and follow-up APIs` |
-| `/api/rag-search` | Screening | `Screening module hits recommend-stocks and follow-up APIs` |
-| `/api/earnings/latest-transcript/:ticker` | Earnings | `Earnings summary uses latest-transcript and ai-doc` + `Earnings transcript uses latest-transcript and ninjas/transcript` |
-| `/api/earnings/ai-doc?docType=summary` | Earnings | `Earnings summary uses latest-transcript and ai-doc` |
-| `/api/earnings/ai-doc?docType=qa` | Earnings | `Earnings Q&A uses ai-doc qa` |
-| `/api/ninjas/transcript` | Earnings | `Earnings transcript uses latest-transcript and ninjas/transcript` |
-| `/api/twitter-search` | Twitter | `Twitter module hits twitter-search and twitter-consolidate` |
-| `/api/twitter-consolidate` | Twitter | `Twitter module hits twitter-search and twitter-consolidate` |
-| `https://keymetrics.checkitanalytics.com/api/resolve` | Performance | `Performance module hits keymetrics endpoints` |
-| `https://keymetrics.checkitanalytics.com/api/find-peers` | Performance | `Performance module hits keymetrics endpoints` |
-| `https://keymetrics.checkitanalytics.com/api/get-metrics` | Performance | `Performance module hits keymetrics endpoints` |
-| `https://keymetrics.checkitanalytics.com/api/peer-key-metrics-conclusion` | Performance | `Performance module hits keymetrics endpoints` |
+| Interface                                                                 | Module      | Test name (frontend flow)                                                                                                 |
+| ------------------------------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `/api/search-news-v2`                                                     | News        | `News module hits search-news-v2 and create-smart-brief`                                                                  |
+| `/api/create-smart-brief`                                                 | News        | `News module hits search-news-v2 and create-smart-brief`                                                                  |
+| `/api/detect-rumor`                                                       | Rumor       | `Rumor module hits detect-rumor`                                                                                          |
+| `/api/newsbrief`                                                          | News Brief  | `News brief module hits newsbrief`                                                                                        |
+| `/api/search-news`                                                        | Screening   | `Screening module hits recommend-stocks and follow-up APIs`                                                               |
+| `/api/rag-search`                                                         | Screening   | `Screening module hits recommend-stocks and follow-up APIs`                                                               |
+| `/api/earnings/latest-transcript/:ticker`                                 | Earnings    | `Earnings summary uses latest-transcript and ai-doc` + `Earnings transcript uses latest-transcript and ninjas/transcript` |
+| `/api/earnings/ai-doc?docType=summary`                                    | Earnings    | `Earnings summary uses latest-transcript and ai-doc`                                                                      |
+| `/api/earnings/ai-doc?docType=qa`                                         | Earnings    | `Earnings Q&A uses ai-doc qa`                                                                                             |
+| `/api/ninjas/transcript`                                                  | Earnings    | `Earnings transcript uses latest-transcript and ninjas/transcript`                                                        |
+| `/api/twitter-search`                                                     | Twitter     | `Twitter module hits twitter-search and twitter-consolidate`                                                              |
+| `/api/twitter-consolidate`                                                | Twitter     | `Twitter module hits twitter-search and twitter-consolidate`                                                              |
+| `https://keymetrics.checkitanalytics.com/api/resolve`                     | Performance | `Performance module hits keymetrics endpoints`                                                                            |
+| `https://keymetrics.checkitanalytics.com/api/find-peers`                  | Performance | `Performance module hits keymetrics endpoints`                                                                            |
+| `https://keymetrics.checkitanalytics.com/api/get-metrics`                 | Performance | `Performance module hits keymetrics endpoints`                                                                            |
+| `https://keymetrics.checkitanalytics.com/api/peer-key-metrics-conclusion` | Performance | `Performance module hits keymetrics endpoints`                                                                            |
 
-### Backend coverage (/api/*)
+### Backend coverage (/api/\*)
 
-| Interface | Module | E2E (frontend flow) | E2E (API mock/real) | Unit |
-| --- | --- | --- | --- | --- |
-| `/api/translate` | i18n | `Chinese input triggers translate before classify` | `translate` | `translate validates input and missing API key` |
-| `/api/classify-intent` | Router | Used by most module tests | `classify-intent` | `validates classify-intent payload` |
-| `/api/competitive-analysis` | Competitive | `Competitive module hits /api/competitive-analysis` | `competitive-analysis` | `/competitive-analysis requires companyName and industry` |
-| `/api/valuation-analysis` | Valuation | `Valuation module hits /api/valuation-analysis` + Screening flow | `valuation-analysis` | `/valuation-analysis requires ticker` |
-| `/api/analyze-redflags` | Screening | `Screening module hits recommend-stocks and follow-up APIs` | `analyze-redflags` | `validates payload and handles missing API key` |
-| `/api/summarize-earnings` | Screening | `Screening module hits recommend-stocks and follow-up APIs` | `summarize-earnings` | `requires ticker and handles short content` |
-| `/api/recommend-stocks` | Screening | `Screening module hits recommend-stocks and follow-up APIs` | `recommend-stocks` | `validates input and missing API key` |
-| `/api/general-qa` | General | `General module hits /api/general-qa` | `general-qa` | `validates input and missing API key` |
-| `/api/fda/companies` | FDA | `FDA module hits /api/fda/companies/:identifier` | `fda companies` | `FDA proxy routes return mocked data` |
-| `/api/earnings/query` | Earnings | - | `earnings/query` | `/earnings/query validates required params` |
-| `/api/parse-earnings-query` | Earnings | - | `parse-earnings-query` | `/parse-earnings-query requires query` |
-| `/api/earnings-fallback` | Earnings | - | `earnings-fallback` | `/earnings-fallback validates input and missing API key` |
+| Interface                   | Module      | E2E (frontend flow)                                              | E2E (API mock/real)    | Unit                                                      |
+| --------------------------- | ----------- | ---------------------------------------------------------------- | ---------------------- | --------------------------------------------------------- |
+| `/api/translate`            | i18n        | `Chinese input triggers translate before classify`               | `translate`            | `translate validates input and missing API key`           |
+| `/api/classify-intent`      | Router      | Used by most module tests                                        | `classify-intent`      | `validates classify-intent payload`                       |
+| `/api/competitive-analysis` | Competitive | `Competitive module hits /api/competitive-analysis`              | `competitive-analysis` | `/competitive-analysis requires companyName and industry` |
+| `/api/valuation-analysis`   | Valuation   | `Valuation module hits /api/valuation-analysis` + Screening flow | `valuation-analysis`   | `/valuation-analysis requires ticker`                     |
+| `/api/analyze-redflags`     | Screening   | `Screening module hits recommend-stocks and follow-up APIs`      | `analyze-redflags`     | `validates payload and handles missing API key`           |
+| `/api/summarize-earnings`   | Screening   | `Screening module hits recommend-stocks and follow-up APIs`      | `summarize-earnings`   | `requires ticker and handles short content`               |
+| `/api/recommend-stocks`     | Screening   | `Screening module hits recommend-stocks and follow-up APIs`      | `recommend-stocks`     | `validates input and missing API key`                     |
+| `/api/general-qa`           | General     | `General module hits /api/general-qa`                            | `general-qa`           | `validates input and missing API key`                     |
+| `/api/fda/companies`        | FDA         | `FDA module hits /api/fda/companies/:identifier`                 | `fda companies`        | `FDA proxy routes return mocked data`                     |
+| `/api/earnings/query`       | Earnings    | -                                                                | `earnings/query`       | `/earnings/query validates required params`               |
+| `/api/parse-earnings-query` | Earnings    | -                                                                | `parse-earnings-query` | `/parse-earnings-query requires query`                    |
+| `/api/earnings-fallback`    | Earnings    | -                                                                | `earnings-fallback`    | `/earnings-fallback validates input and missing API key`  |
 
 ## Frontend Intent → Interface Flow (from `client/src/pages/home.tsx`)
 
 ```mermaid
+
 flowchart TD
-  A[User message] --> B[/api/translate? (if input is Chinese)/]
+  A[User message]
+
+  A -->|input is Chinese| B[/api/translate/]
   B --> C[/api/classify-intent/]
+  A -->|otherwise| C
 
   C -->|NEWS| N1[/api/search-news-v2/]
   N1 --> N2[Render news + Generate Smart Brief button]
@@ -145,21 +150,21 @@ flowchart TD
 
   C -->|RUMOR| R1[/api/detect-rumor/]
 
-  C -->|EARNINGS| E1[/api/earnings/latest-transcript/:ticker/]
+  C -->|EARNINGS| E1[/api/earnings latest transcript/]
   E1 --> E2{topic?}
-  E2 -->|summary| E3[/api/earnings/ai-doc?docType=summary/]
-  E2 -->|qa| E4[/api/earnings/ai-doc?docType=qa/]
-  E2 -->|transcript| E5[/api/ninjas/transcript/]
+  E2 -->|summary| E3[/api/earnings ai summary/]
+  E2 -->|qa| E4[/api/earnings ai qa/]
+  E2 -->|transcript| E5[/api/ninjas transcript/]
 
-  C -->|PERFORMANCE| P1[https://keymetrics.../api/resolve]
-  P1 --> P2[https://keymetrics.../api/find-peers]
-  P2 --> P3[https://keymetrics.../api/get-metrics]
-  P3 --> P4[https://keymetrics.../api/peer-key-metrics-conclusion]
+  C -->|PERFORMANCE| P1[keymetrics resolve]
+  P1 --> P2[keymetrics find peers]
+  P2 --> P3[keymetrics get metrics]
+  P3 --> P4[keymetrics peer conclusion]
 
   C -->|TWITTER| T1[/api/twitter-search/]
   T1 --> T2[/api/twitter-consolidate/]
 
-  C -->|FDA| F1[/api/fda/companies/:identifier/]
+  C -->|FDA| F1[/api/fda companies/]
 
   C -->|COMPETITIVE| C1[/api/competitive-analysis/]
 
