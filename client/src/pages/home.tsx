@@ -1367,7 +1367,7 @@ const Home = () => {
           const primaryValue = tickerData[metric]?.[key];
           content += `<td style="padding: 10px 12px; text-align: right; font-weight: 600; color: #4f46e5;">${formatMetricValue(primaryValue, metric)}</td>`;
 
-          // 同行数据
+          // 同行数据,
           peerTickers.forEach((peerTicker) => {
             const peerData = metricsData[peerTicker];
             const peerValue =
