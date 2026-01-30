@@ -1346,11 +1346,16 @@ const Home = () => {
         const comparisonMetrics = [
           "Market Cap",
           "Total Revenue",
+          "Revenue (TTM)",
+          "Gross Profit (TTM)",
           "Gross Margin %",
           "Operating Expense",
           "EBIT",
           "Net Income",
+          "Net Income (TTM)",
           "Free Cash Flow",
+          "P/E Ratio",
+          "Price/Sales",
         ];
 
         comparisonMetrics.forEach((metric, idx) => {
@@ -1377,7 +1382,7 @@ const Home = () => {
         // ✅ 新增：Market Cap/Revenue 和 Market Cap/Net Income 行
         // Market Cap/Revenue
         content += `<tr style="background: #f0fdf4; border-bottom: 1px solid #e5e7eb;">`;
-        content += `<td style="padding: 10px 12px; font-weight: 500; color: #374151;">Market Cap/Revenue</td>`;
+        //content += `<td style="padding: 10px 12px; font-weight: 500; color: #374151;">Market Cap/Revenue</td>`;
 
         const primaryMC = tickerData["Market Cap"]?.["Current"];
         const primaryRev = tickerData["Total Revenue"]?.[latestQuarter];
@@ -1401,7 +1406,7 @@ const Home = () => {
 
         // Market Cap/Net Income
         content += `<tr style="background: #fef3c7; border-bottom: 1px solid #e5e7eb;">`;
-        content += `<td style="padding: 10px 12px; font-weight: 500; color: #374151;">Market Cap/Net Income</td>`;
+        //content += `<td style="padding: 10px 12px; font-weight: 500; color: #374151;">Market Cap/Net Income</td>`;
 
         const primaryNI = tickerData["Net Income"]?.[latestQuarter];
         const primaryMCNI =
@@ -1453,6 +1458,7 @@ const Home = () => {
         "EBIT",
         "Net Income",
         "Free Cash Flow",
+        
       ];
 
       displayMetrics.forEach((metric, idx) => {
